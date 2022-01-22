@@ -9,7 +9,7 @@ module.exports = {
   ],
   theme: {
     extbackgroundImage: {
-      'assurance': "url('./src/img/insurance.jpg')",
+      'assurance': "url('./img/insurance.jpg')",
     }
   },
   variants: {},
