@@ -7,6 +7,8 @@ import Assurance from './Pages/Assurance';
 import Carnet from './Pages/Carnet'
 import Stockage from './Pages/Stockage'
 import Entretien from './Pages/Entretien'
+import Parrainage from './Pages/Parrainage';
+import Info from './Pages/Info';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route exact path="/stockage" component ={Stockage} />
         <Route exact path="/entretien" component ={Entretien} />
         <Route exact path="/carnet" component ={Carnet} />
+        <Route exact path="/parrainage" component ={Carnet} />
+        <Route exact path="/info" component ={Info} />
       </Switch>
       <Footer/>
     </div>
