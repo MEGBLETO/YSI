@@ -2,12 +2,12 @@ import React from 'react';
 import { AiOutlineMenu} from 'react-icons/ai'
 
 const Nav = () => {
-  return <div>
-      <nav className="flex justify-between w-full border-b-2 p-3 place-items-center text-sm">
+  return <div className="min-h-full ">
+      <nav className="flex fixed z-10 justify-between w-full border-b-2 p-3 place-items-center text-sm bg-white sha">
           <div><h1 className="text-blue-900 text-xl font-bold">BoatOn</h1></div>
 
           <ul className=" hidden sm:flex  flex-wrap space-x-3">
-              <li><div></div> Stockage</li>
+              <li><div className="bg-[url('../img/insurance')"></div> Stockage</li>
               <li><div></div> Entretien</li>
               <li><div></div> Assurance</li>
               <li><div></div> Carnet d'entretien</li>

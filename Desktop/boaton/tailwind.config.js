@@ -8,7 +8,9 @@ module.exports = {
     './public/index.html',
   ],
   theme: {
-    extend: {}
+    extbackgroundImage: {
+      'assurance': "url('./src/img/insurance.jpg')",
+    }
   },
   variants: {},
   plugins: []
