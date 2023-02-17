@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Navigation from "@/components/Navigation";
+import { PencilIcon,  TrashIcon } from '@heroicons/react/24/solid'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,11 +39,39 @@ export default function Home() {
               </div>
             </div>
             <table className="w-full border-black border-2">
-              <th>Nom</th>
-              <th>Description</th>
-              <th>%Exp</th>
-              <th>Date d'exp</th>
-              <th>Actions</th>
+              <th className="border-2 border-black">Nom</th>
+              <th className="border-2 border-black">Description</th>
+              <th className="border-2 border-black">%Exp</th>
+              <th className="border-2 border-black">Date d'exp</th>
+              <th className="border-2 border-black">Actions</th>
+
+              <tr className="p-2 border-black border-2">
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">
+                  <div className="relative w-full h-full flex items-center">
+                  <PencilIcon className="w-[20px]"/>
+                  <TrashIcon className="w-[20px]"/>
+                  </div>
+              
+                  </td>
+              </tr>
+              <tr className="p-2 border-black border-2">
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+              </tr>
+              <tr className="p-2 border-black border-2">
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+                <td className="border-2 text-center border-black">Hello</td>
+              </tr>
             </table>
           </div>
         </div>
