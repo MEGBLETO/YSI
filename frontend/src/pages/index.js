@@ -1,17 +1,27 @@
+
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Navigation from "@/components/Navigation";
-import { PencilIcon,  TrashIcon } from '@heroicons/react/24/solid'
-
-const inter = Inter({ subsets: ["latin"] });
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import readXlsxFile from "read-excel-file";
+import ImportExelModal from "@/components/ImportExelModal";
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClick = () => {
+    console.log("hello");
+    setShowModal((prev) => !prev);
+  };
+
   return (
     <>
       <Navigation />
       <div className="min-h-screen w-full ">
+        {showModal ? <ImportExelModal handleclick={handleClick} /> : <></>}
         <div className="relative top-[10vh] w-full ">
           <div className="flex flex-col items-center">
             <h1 className="text-xl font-bold p-3">RESSOURCES</h1>
@@ -35,43 +45,85 @@ export default function Home() {
                 </select>
               </div>
               <div className="bg-gray-300 hover:shadow-md p-1 hover:cursor-pointer rounded-md">
-                <p>Importer.xls</p>
+                <p onClick={() => handleClick()}>Importer.xls</p>
               </div>
             </div>
             <table className="w-full border-black border-2">
-              <th className="border-2 border-black">Nom</th>
-              <th className="border-2 border-black">Description</th>
-              <th className="border-2 border-black">%Exp</th>
-              <th className="border-2 border-black">Date d'exp</th>
-              <th className="border-2 border-black">Actions</th>
-
-              <tr className="p-2 border-black border-2">
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">
-                  <div className="relative w-full h-full flex items-center">
-                  <PencilIcon className="w-[20px]"/>
-                  <TrashIcon className="w-[20px]"/>
-                  </div>
-              
+              <thead>
+                <tr>
+                  <th className="border-2 border-black">
+                    <p>Nom</p>
+                  </th>
+                  <th className="border-2 border-black">
+                    <p>Description</p>
+                  </th>
+                  <th className="border-2 border-black">
+                    <p>%Exp</p>
+                  </th>
+                  <th className="border-2 border-black">
+                    <p>Date d'exp</p>
+                  </th>
+                  <th className="border-2 border-black">
+                    <p>Actions</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="p-2 border-black border-2">
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
                   </td>
-              </tr>
-              <tr className="p-2 border-black border-2">
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-              </tr>
-              <tr className="p-2 border-black border-2">
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-                <td className="border-2 text-center border-black">Hello</td>
-              </tr>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <div className="relative w-full h-full flex items-center">
+                      <PencilIcon className="w-[20px]" />
+                      <TrashIcon className="w-[20px]" />
+                    </div>
+                  </td>
+                </tr>
+                <tr className="p-2 border-black border-2">
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                </tr>
+                <tr className="p-2 border-black border-2">
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                  <td className="border-2 text-center border-black">
+                    <p>Hello</p>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
