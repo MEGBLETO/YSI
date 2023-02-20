@@ -1,0 +1,1 @@
+mongoose.connect(`mongodb+srv://lol123:${process.env.mongopwd}@cluster0.lt3vzdu.mongodb.net/?retryWrites=true&w=majority`);

@@ -1,40 +1,19 @@
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose');
+const campaignSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    resources: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Resource'
+    }]
+});
 
-const Campagne = mongoose.Schema({
-    Nom_Campagne:{
-        type:String,
-        required:true,
-        trim:true,
-        lowercase:true,
-        minLength:2,
-        maxLength:100
-    },
-    theme:{
-        type:String,
-        required:true,
-        trim:true,
-        lowercase:true,
-        minLength:2,
-        maxLength:100
-    },
-    videoUrl:{
-        type:String,
-        required:true,
-        trim:true,
-        lowercase:true,
-        minLength:2,
-        maxLength:100
-    },
-    dateD:{
-        type:Date,
-        required:true,
-        
-    },
-    DateF:{
-        type:Date,
-        required:true,
-    },
-})
 
-module.exports= mongoose.model('Campagne',Campagne)
+module.exports = mongoose.model("Campaign", campaignSchema);

@@ -1,49 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const apiRouter = require('./routes')
-const res = require('express/lib/response');
-const { compileETag } = require('express/lib/utils');
-const cors = require('cors')
-const errorHandler = require('./middlewares/errorHandler');
-require('dotenv').config()
+require("dotenv").config();
 
+const express = require("express");
+// const {
+//   auth,
+//   getSingleUser,
+//   getUserANdupdate,
+// } = require("./controllers/user.controlller");
+// const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
-app.use(express.json());
+const cors = require("cors");
+
+const apiRouter = require("./routes");
+
+const connect = require("./Database/connect");
+// const User = require("./Database/user.models");
+
 app.use(cors());
-mongoose.set('strictQuery',false);
 
-mongoose.connect('')
-.then(() =>{    
-    console.log("tu a reussi a te co a la bd pouleto")
-})
-.catch(err=>console.log(err));
+app.use(express.json());
 
-app.use("/api/v1",apiRouter);
-app.use(errorHandler);
+app.use(apiRouter);
+// app.use(errorHandler);
 
-app.listen("7001", function(){
+const PORT = 5000 || process.env.port;
 
-    console.log("ça start mon pouleto");
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.listen(PORT, () => {
+  console.log(`app listening on ${PORT}....`);
+});

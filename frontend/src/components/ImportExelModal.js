@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import readXlsxFile from 'read-excel-file'
-
+import readXlsxFile from "read-excel-file";
 
 const ImportExelModal = ({ handleclick }) => {
   const {
@@ -15,10 +14,13 @@ const ImportExelModal = ({ handleclick }) => {
     try {
       console.log(data.file[0]);
 
-
       readXlsxFile(data.file[0]).then((rows) => {
-        console.log(rows)
-      })
+        console.log(rows);
+      });
+
+      setTimeout(() => {
+        handleclick();
+      }, 1000);
     } catch (error) {
       console.log(error);
       //   setError(error.response.data.message)
@@ -54,11 +56,7 @@ const ImportExelModal = ({ handleclick }) => {
           </div>
         </div>
 
-        <button
-          className="bg-black text-white p-3"
-          type="submit"
-          name="submit"
-        >
+        <button className="bg-black text-white p-3" type="submit" name="submit">
           submit
         </button>
       </form>
