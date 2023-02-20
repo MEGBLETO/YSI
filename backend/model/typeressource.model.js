@@ -12,4 +12,4 @@ const resourceTypeSchema = mongoose.Schema({
     }
 });
 
-module.exports= mongoose.model('TypeRessource',TypeRessourceShema)
+module.exports= mongoose.model('TypeRessource',resourceTypeSchema)
