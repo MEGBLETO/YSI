@@ -1,0 +1,17 @@
+{
+  "url": "http://localhost:5000/campaign/addcampaign/",
+  "requestType": "POST",
+  "body": {
+    "title": "Summer Sale Campaign",
+    "description": "Promote our summer sale with banners and social media posts",
+    "startDate": "2022-06-01T00:00:00.000Z",
+    "endDate": "2022-06-30T23:59:59.999Z",
+    "budget": 5000,
+    "resources": [
+      "60c9a446fa22c047142e3d3d",
+      "60c9a446fa22c047142e3d3e"
+    ]
+  }
+}
+
+
