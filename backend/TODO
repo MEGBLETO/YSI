@@ -1,0 +1,5 @@
+yes après faudra faire les controlleur pour les insertion dans la bd les truc classique du genre ajout modif suppression etc ...
+1: faire les liaison entre les 3 modèle /campagne relier a ressource/ et /campagne relier a user/
+une fois que ça c'est fait :
+2:faut faire 3 controller pour: / ajout,modif,delete de user  /   pareil pour campagne / pareil pour ressource
+3:et enfin les differentes route pour les page du coter back et se sera deja pas mal
