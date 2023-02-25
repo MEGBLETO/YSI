@@ -4,61 +4,47 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Navigation from "@/components/Navigation";
-import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 import readXlsxFile from "read-excel-file";
 import ImportExelModal from "@/components/ImportExelModal";
-import CreatecampaignModal from "@/components/CreatecampaignModal";
+import PhotoviewModal from "@/components/PhotoviewModal";
+import RessourceModal from "../../components/createRessourceModal";
 import axios from "axios";
-import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
-
-
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
-  const [campaignModal, setShowCampaignModal] = useState(false);
+  const [preview, setPreview] = useState(false);
 
+  const [ressourceModal, setShowRessourceModal] = useState(false);
   const [excelData, setExcelData] = useState([]);
 
-  const [campaigns, setCampaigns] = useState();
-  
-
-  const [input, setTextinput] = useState();
+  const [ressources, setRessources] = useState();
 
   const createCampaign = async (data) => {
     await axios
-      .post("http://localhost:5000/campaign/addcampaign/", data)
+      .post("http://localhost:5000/ressource/addressource", data)
       .then((res) => {
         console.log(res);
       });
-      window.location.reload()
-      NotificationManager.success('Success message', 'campagne has been successfully created');
   };
 
-  const getAllCampaigns = async () => {
-    const campaigns = await axios.get(
-      `http://localhost:5000/campaign/getcampaigns/`
+  const getAllRessources = async () => {
+    const ressources = await axios.get(
+      `http://localhost:5000/ressource/getressource`
     );
-    if (campaigns) {
-      setCampaigns(campaigns.data);
+
+    if (ressources) {
+      console.log(ressources.data);
+      setRessources(ressources.data);
     }
   };
-
-  // useEffect(() => {
-  //   if (campaigns) {
-  //     const filteredData = campaigns.filter((item) =>
-  //       item.description.toLowerCase().includes(input.toLowerCase())
-  //     );
-  //     setCampaigns(filteredData);
-  //   }
-  // }, [input]);
 
   const handleClick = () => {
     setShowModal((prev) => !prev);
   };
 
-  const handleCampaignClick = () => {
-    setShowCampaignModal((prev) => !prev);
+  const handleressourceModal = () => {
+       setShowRessourceModal((prev) => !prev);
   };
 
   const formatExcelData = () => {
@@ -81,18 +67,21 @@ export default function Home() {
     });
   };
 
+  const showPreview = () => {
+    setPreview((prev) => !prev);
+  };
+
   useEffect(() => {
     formatExcelData();
   }, [excelData]);
 
   useEffect(() => {
-    getAllCampaigns();
+    getAllRessources();
   }, []);
 
   return (
     <>
       <Navigation />
-      <NotificationContainer/>
       <div className="min-h-[200vh] w-full ">
         {showModal ? (
           <ImportExelModal
@@ -102,21 +91,29 @@ export default function Home() {
         ) : (
           <></>
         )}
-        {campaignModal ? (
-         <CreatecampaignModal handleCampaignClick={handleCampaignClick} createCampaign={createCampaign}/>
+
+        {preview ? (
+          <PhotoviewModal
+            handleclick={showPreview}
+            setExcelData={setExcelData}
+          />
+        ) : (
+          <></>
+        )}
+        {ressourceModal ? (
+          <RessourceModal   handleressourceModal={handleressourceModal}/>
         ) : (
           <></>
         )}
         <div className="relative top-[10vh] w-full ">
           <div className="flex flex-col items-center">
-            <h1 className="text-xl font-bold p-3">CAMPAGNES</h1>
+            <h1 className="text-xl font-bold p-3">RESSOURCES</h1>
           </div>
           <div className="w-10/12 min-h-[600px] mx-auto">
             <div className="flex justify-evenly items-center p-3 bg-green-600">
               <div className="space-x-2">
                 <input
                   className="border-2 p-1 border-black"
-                  // onChange={(e)=> setTextinput(e.target.value)}
                   type="search"
                   placeholder="Search..."
                 />
@@ -131,65 +128,55 @@ export default function Home() {
                 </select>
               </div>
               <div className="bg-gray-300 hover:shadow-md p-1 hover:cursor-pointer rounded-md">
-                <p onClick={() => handleClick()}>Importer.xls</p>
-              </div>
-
-              <div
-                onClick={() => handleCampaignClick()}
-                className="flex items-center flex-col bg-gray-300 hover:shadow-md p-1 hover:cursor-pointer rounded-md"
-              >
-                <p>Create campaign</p>
-                <PlusIcon className="w-3" />
+                <p onClick={() => handleressourceModal()}>Create a new Ressource</p>
               </div>
             </div>
             <table className="min-h-screen pb-3 w-full border-black border-2">
-              <thead>
-                <tr>
+              <thead >
+                <tr className="p-3">
                   <th className="border-2 border-black">
-                    <p>Nom</p>
+                    <p>Thème</p>
                   </th>
                   <th className="border-2 border-black">
                     <p>Description</p>
                   </th>
                   <th className="border-2 border-black">
-                    <p>Date de debut</p>
+                    <p>Date d'obtention des droits</p>
                   </th>
                   <th className="border-2 border-black">
-                    <p>Date de Fin</p>
+                    <p>Date D'expiration</p>
                   </th>
                   <th className="border-2 border-black">
-                    <p>Budget</p>
-                  </th>
-                  <th className="border-2 border-black">
-                    <p>Actions</p>
+                    <p>Edit / Delete</p>
                   </th>
                 </tr>
               </thead>
               <tbody className="">
-                {campaigns ? (
-                  campaigns.map(campaign => (
-                    <tr  className="p-2 border-black border-2">
+                {ressources ? (
+                  ressources.map((ressource) => (
+                    <tr className="p-2 border-black border-2">
                       <td className="border-2 text-center border-black">
-                        <p>{campaign.title}</p>
+                        <p>{ressource.label}</p>
                       </td>
                       <td className="border-2 text-center border-black">
-                        <p>{campaign.description}</p>
+                        <p>{ressource.description}</p>
                       </td>
                       <td className="border-2 text-center border-black">
-                        <p>{campaign.startDate}</p>
+                        <p>{ressource.rightDate}</p>
                       </td>
                       <td className="border-2 text-center border-black">
-                        <p>{campaign.endDate}</p>
+                        <p>{ressource.endDate}</p>
                       </td>
-                      <td className="border-2 text-center border-black">
-                        <p>{campaign.budget}</p>
-                      </td>
-
                       <td className="border-2 text-center border-black">
                         <p className="flex  items-center justify-evenly  text-center">
-                          <PencilIcon className="text-yellow-700 cursor-pointer w-5 hover:w-7 hover:transition ease-in-out" />
-                          <TrashIcon className="text-red-400 w-5 cursor-pointer hover:w-7 hover:transition ease-in-out" />
-                          <PlusIcon className="text-red-400 w-5 cursor-pointer hover:w-7 hover:transition ease-in-out" />
+                          <PencilIcon className="text-yellow-700 cursor-pointer w-5 hover:w-7 hover:transition ease=in-out" />
+                          <TrashIcon className="text-red-400 w-5 cursor-pointer hover:w-7" />
+                          <EyeIcon
+                            onClick={() => {
+                              showPreview();
+                            }}
+                            className="text-green-400 w-5 cursor-pointer hover:w-7"
+                          />
                         </p>
                       </td>
                     </tr>

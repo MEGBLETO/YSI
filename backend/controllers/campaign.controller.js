@@ -19,3 +19,13 @@ exports.createcampaign = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+exports.getCampaigns = async (req, res) => {
+  try {
+    const campaigns = await Campaign.find();
+    res.status(200).send(campaigns);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+};

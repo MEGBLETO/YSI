@@ -7,6 +7,7 @@ const CampaignController = require("../controllers/campaign.controller")
 
 
 router.post('/addcampaign', CampaignController.createcampaign)
+router.get('/getcampaigns', CampaignController.getCampaigns)
  
 
 

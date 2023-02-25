@@ -9,9 +9,9 @@ const Navigation = () => {
             <p className='text-xl font-bold'>COMKING</p>
         </div>
         <ul className='flex flex-1 justify-evenly'>
-            <Link href="/">Accueil</Link>
-            <Link href="/">Ressources</Link>
-            <Link href="/">Campagnes</Link>
+            <Link className='cursor-pointer' href="/">Accueil</Link>
+            <Link className='hover:cursor-pointer' href="/">Campagnes</Link>
+            <Link className='cursor-pointer' href="/ressources">Ressources</Link>
         </ul>
     </div>
   )
